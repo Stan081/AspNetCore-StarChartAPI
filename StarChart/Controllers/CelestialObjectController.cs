@@ -60,7 +60,7 @@ namespace StarChart.Controllers
             foreach (var record in records)
             {
                 var check = records.Where(x => x.OrbitedObjectId == record.Id).ToList();
-                record.Satellites.AddRange(check);
+                record.Satellites = check;
             }
             return Ok(records);
 
