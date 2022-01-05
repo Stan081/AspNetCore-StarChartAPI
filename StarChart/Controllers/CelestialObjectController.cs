@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using StarChart.Data;
+using StarChart.Models;
 
 namespace StarChart.Controllers
 {
@@ -65,5 +66,70 @@ namespace StarChart.Controllers
             return Ok(records);
 
         }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CelestialObject obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+
+            return CreatedAtRoute(nameof(GetById),
+                new { id = obj.Id },
+                obj);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int Id, CelestialObject obj)
+        {
+            if (Id != obj.Id) return BadRequest();
+            var record = _context.CelestialObjects.Find(Id);
+            if (record is null) return NotFound();
+
+            record.Name = obj.Name;
+            record.OrbitalPeriod = obj.OrbitalPeriod;
+            record.OrbitedObjectId = obj.OrbitedObjectId;
+
+            _context.CelestialObjects.Update(record);
+            _context.SaveChanges();
+
+            return NoContent();
+
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult RenameObject(int Id, CelestialObject obj)
+        {
+            if (Id != obj.Id) return BadRequest();
+            var record = _context.CelestialObjects.Find(Id);
+            if (record is null) return NotFound();
+
+            record.Name = obj.Name;
+
+            _context.CelestialObjects.Update(record);
+            _context.SaveChanges();
+
+            return NoContent();
+
+        }
+
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int Id)
+        {
+            var records = _context.CelestialObjects.Where(x => x.Id == Id || x.OrbitedObjectId == Id).ToList();
+            if (records is null) return NotFound();
+
+            foreach (var record in records)
+            {
+                _context.Remove(record);
+            }
+           
+            _context.SaveChanges();
+
+            return NoContent();
+
+        }
+
+
     }
 }
