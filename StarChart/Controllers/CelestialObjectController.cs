@@ -83,7 +83,7 @@ namespace StarChart.Controllers
         {
             if (Id != obj.Id) return BadRequest();
             var record = _context.CelestialObjects.Find(Id);
-            if (record is null) return NotFound();
+            if (record == null) return NotFound();
 
             record.Name = obj.Name;
             record.OrbitalPeriod = obj.OrbitalPeriod;
@@ -101,7 +101,7 @@ namespace StarChart.Controllers
         {
             if (Id != obj.Id) return BadRequest();
             var record = _context.CelestialObjects.Find(Id);
-            if (record is null) return NotFound();
+            if (record == null) return NotFound();
 
             record.Name = obj.Name;
 
@@ -117,7 +117,7 @@ namespace StarChart.Controllers
         public IActionResult Delete(int Id)
         {
             var records = _context.CelestialObjects.Where(x => x.Id == Id || x.OrbitedObjectId == Id).ToList();
-            if (records is null) return NotFound();
+            if (records == null) return NotFound();
 
             foreach (var record in records)
             {
