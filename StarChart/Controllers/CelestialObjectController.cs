@@ -81,7 +81,6 @@ namespace StarChart.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int Id, CelestialObject obj)
         {
-            if (Id != obj.Id) return BadRequest();
             var record = _context.CelestialObjects.Find(Id);
             if (record == null)
                 return NotFound();
