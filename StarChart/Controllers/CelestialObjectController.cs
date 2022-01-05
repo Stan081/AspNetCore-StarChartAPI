@@ -49,5 +49,18 @@ namespace StarChart.Controllers
             return Ok(records);
 
         }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var records = _context.CelestialObjects.ToList();
+            foreach (var record in records)
+            {
+                var check = records.Where(x => x.OrbitedObjectId == record.Id);
+                record.Satellites.AddRange(check);
+            }
+            return Ok(records);
+
+        }
     }
 }
