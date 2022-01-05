@@ -28,7 +28,7 @@ namespace StarChart.Controllers
             var result = records.Where(x => x.OrbitedObjectId == Id).ToList();
             if (result != null)
             {
-                record.Satellites.AddRange(result);
+                record.Satellites = result;
             }
             return Ok(record);
 
@@ -46,8 +46,8 @@ namespace StarChart.Controllers
 
             foreach (var record in records)
             {
-                var check = output.Where(x => x.OrbitedObjectId == record.Id);
-                record.Satellites.AddRange(check);
+                var check = output.Where(x => x.OrbitedObjectId == record.Id).ToList();
+                record.Satellites = check;
             }
             return Ok(records);
 
