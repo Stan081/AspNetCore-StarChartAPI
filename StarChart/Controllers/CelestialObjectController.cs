@@ -16,7 +16,7 @@ namespace StarChart.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public IActionResult GetById(int Id)
         {
             var records = _context.CelestialObjects;
@@ -39,6 +39,7 @@ namespace StarChart.Controllers
             var output = _context.CelestialObjects;
 
             var records = output.Where(x => x.Name == Name);
+
             if (records == null) return NotFound();
 
             foreach (var record in records)
