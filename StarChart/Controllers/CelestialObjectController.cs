@@ -22,7 +22,8 @@ namespace StarChart.Controllers
             var records = _context.CelestialObjects;
 
             var record = records.Find(Id);
-            if (record == null) return NotFound();
+            if (record == null)
+                return NotFound();
 
             var result = records.Where(x => x.OrbitedObjectId == Id).ToList();
             if (result != null)
@@ -40,7 +41,8 @@ namespace StarChart.Controllers
 
             var records = output.Where(x => x.Name == Name);
 
-            if (records == null) return NotFound();
+            if (records == null)
+                return NotFound();
 
             foreach (var record in records)
             {
