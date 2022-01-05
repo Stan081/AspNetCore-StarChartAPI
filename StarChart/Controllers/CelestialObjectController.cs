@@ -17,7 +17,7 @@ namespace StarChart.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetByID(int Id)
+        public IActionResult GetById(int Id)
         {
             var records = _context.CelestialObjects;
 
@@ -34,7 +34,7 @@ namespace StarChart.Controllers
         }
 
         [HttpGet("{name}")]
-        public IActionResult GetByID(string Name)
+        public IActionResult GetByName(string Name)
         {
             var output = _context.CelestialObjects;
 
