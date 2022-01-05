@@ -28,7 +28,7 @@ namespace StarChart.Controllers
             var result = records.Where(x => x.OrbitedObjectId == Id).ToList();
             if (result != null)
             {
-                record.Satellites.Insert(1, record);
+                record.Satellites.AddRange(result);
             }
             return Ok(record);
 
