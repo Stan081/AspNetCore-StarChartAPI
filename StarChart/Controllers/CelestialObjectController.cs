@@ -59,7 +59,7 @@ namespace StarChart.Controllers
             var records = _context.CelestialObjects.ToList();
             foreach (var record in records)
             {
-                var check = records.Where(x => x.OrbitedObjectId == record.Id);
+                var check = records.Where(x => x.OrbitedObjectId == record.Id).ToList();
                 record.Satellites.AddRange(check);
             }
             return Ok(records);
