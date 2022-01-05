@@ -41,7 +41,7 @@ namespace StarChart.Controllers
 
             var records = output.Where(x => x.Name == Name);
 
-            if (records == null)
+            if (!records.Any())
                 return NotFound();
 
             foreach (var record in records)
